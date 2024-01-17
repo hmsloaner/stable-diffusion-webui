@@ -303,7 +303,7 @@ def download_and_cache_models(dirname):
     cache_file = os.path.join(dirname, model_file_name)
     if not os.path.exists(cache_file):
         print(f"downloading face detection model from '{download_url}' to '{cache_file}'")
-        response = requests.get(download_url)
+        response = requests.get(download_url, timeout=60)
         with open(cache_file, "wb") as f:
             f.write(response.content)
 
