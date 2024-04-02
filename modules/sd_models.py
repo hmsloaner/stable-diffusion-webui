@@ -59,7 +59,7 @@ class CheckpointInfo:
         else:
             name = os.path.basename(filename)
 
-        if name.startswith("\\") or name.startswith("/"):
+        if name.startswith(("\\", "/")):
             name = name[1:]
 
         def read_metadata():

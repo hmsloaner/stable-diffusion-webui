@@ -77,7 +77,7 @@ def verify_url(url):
 
 
 def decode_base64_to_image(encoding):
-    if encoding.startswith("http://") or encoding.startswith("https://"):
+    if encoding.startswith(("http://", "https://")):
         if not opts.api_enable_requests:
             raise HTTPException(status_code=500, detail="Requests not allowed")
 
