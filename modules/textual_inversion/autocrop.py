@@ -1,8 +1,8 @@
 import cv2
-import requests
 import os
 import numpy as np
 from PIL import ImageDraw
+from security import safe_requests
 
 GREEN = "#0F0"
 BLUE = "#00F"
@@ -303,7 +303,7 @@ def download_and_cache_models(dirname):
     cache_file = os.path.join(dirname, model_file_name)
     if not os.path.exists(cache_file):
         print(f"downloading face detection model from '{download_url}' to '{cache_file}'")
-        response = requests.get(download_url, timeout=60)
+        response = safe_requests.get(download_url, timeout=60)
         with open(cache_file, "wb") as f:
             f.write(response.content)
 
