@@ -14,6 +14,7 @@ from modules import cmd_args, errors
 from modules.paths_internal import script_path, extensions_dir
 from modules.timer import startup_timer
 from modules import logging_config
+from security import safe_requests
 
 args, _ = cmd_args.parser.parse_known_args()
 logging_config.setup_logging(args.loglevel)
@@ -204,8 +205,7 @@ def git_pull_recursive(dir):
 
 def version_check(commit):
     try:
-        import requests
-        commits = requests.get('https://api.github.com/repos/AUTOMATIC1111/stable-diffusion-webui/branches/master', timeout=60).json(timeout=60)
+        commits = safe_requests.get('https://api.github.com/repos/AUTOMATIC1111/stable-diffusion-webui/branches/master', timeout=60).json(timeout=60)
         if commit != "<none>" and commits['commit']['sha'] != commit:
             print("--------------------------------------------------------")
             print("| You are not up to date with the most recent release. |")
